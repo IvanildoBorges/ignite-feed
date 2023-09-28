@@ -8,3 +8,18 @@
     gap: 2rem;  /* distância entre as colunas */
     align-items: flex-start;    /* sempre alinhados para o top, para não ficarem com a mesma altura */
 }
+
+@media screen and (max-width: 768px) {
+    html {
+        /* 1rem = 16px então:
+            16px -> 100%
+            14px -> x  
+            x = (14*100)/16 = 87.5%
+        */
+        font-size: 87.5%; 
+    }
+    
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}
