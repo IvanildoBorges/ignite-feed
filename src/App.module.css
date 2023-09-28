@@ -1,0 +1,10 @@
+.wrapper {
+    max-width: 70rem;
+    margin: 2rem auto; /* fica centralizado na tela */
+    padding: 0 1rem; /* se diminuir para um tamanho menor que 70rem, dè uma distanciada das laterias em 1rem*/
+    
+    display: grid;
+    grid-template-columns: 256px 1fr; /* tamanho da coluna sidebar e coluna do conteúdo */
+    gap: 2rem;  /* distância entre as colunas */
+    align-items: flex-start;    /* sempre alinhados para o top, para não ficarem com a mesma altura */
+}
