@@ -33,13 +33,11 @@ function App() {
           {
             type: "hashtag",
             content: {
-              hashtag1: "#typescript",
-              hashtag2: "#project",
-              hashtag3: "#banco"
+              tags: ["#typescript", "#project", "#banco"],
             }
           },
       ],
-      publishedAt: new Date("2023-09-30 12:00:00"),
+      publishedAt: new Date("2023-09-30T12:00:00.000Z"),
     },
     {
       id: 2,
@@ -67,13 +65,11 @@ function App() {
           {
             type: "hashtag",
             content: {
-              hashtag1: "#typescript",
-              hashtag2: "#project",
-              hashtag3: "#banco"
+              tags: ["#typescript", "#project", "#banco"],
             }
           },
       ],
-      publishedAt: new Date("2023-10-01 12:00:00"),
+      publishedAt: new Date("2023-09-29T20:00:00.000Z"),
     },
   ]
   
