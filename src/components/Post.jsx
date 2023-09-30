@@ -8,6 +8,7 @@ import { useState } from "react"
 export function Post({ author, publishedAt, content }) {
     const [comments, setComments] = useState(["Muito bom Ivan, parabéns!!! 👏🏼👏🏼"])
     const [newCommentText, setNewCommentText] = useState("")
+    const isNewCommentEmpty = newCommentText.length === 0
 
     // const publishedDateFormatted = new Intl.DateTimeFormat("pt-br", {
     //     day: "2-digit",
@@ -32,6 +33,7 @@ export function Post({ author, publishedAt, content }) {
     }
 
     function handleNewCommentChange() {
+        event.target.setCustomValidity("")
         setNewCommentText(event.target.value)
     }
 
@@ -42,6 +44,10 @@ export function Post({ author, publishedAt, content }) {
             return comment !== commentoDelete 
         })
         setComments(commentWithoutDeleteOne)
+    }
+
+    function handleNewCommentInvalid() {
+        event.target.setCustomValidity("Digite um comentário!")
     }
 
     return (
@@ -90,9 +96,13 @@ export function Post({ author, publishedAt, content }) {
                     placeholder="Deixe seu comentário..."
                     value={newCommentText}
                     onChange={handleNewCommentChange}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button type="submit" disabled={isNewCommentEmpty}>
+                        Publicar
+                    </button>
                 </footer>
             </form>
             <div className={styles.commentList}>
