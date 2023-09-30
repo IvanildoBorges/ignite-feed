@@ -35,6 +35,15 @@ export function Post({ author, publishedAt, content }) {
         setNewCommentText(event.target.value)
     }
 
+    function deleteComment(commentoDelete) {
+        //imutabilidade
+        const commentWithoutDeleteOne = comments.filter(comment => {
+            //retorna uma lista de comentários que não forem iguais
+            return comment !== commentoDelete 
+        })
+        setComments(commentWithoutDeleteOne)
+    }
+
     return (
         <article className={styles.post}>
             <header>
@@ -88,7 +97,13 @@ export function Post({ author, publishedAt, content }) {
             </form>
             <div className={styles.commentList}>
                 {comments.map((comment, index) => {
-                    return <Comment key={index} content={comment} />
+                    return (
+                        <Comment 
+                            key={index} 
+                            content={comment} 
+                            onDeleteComment={deleteComment}
+                        />
+                    )
                 })}
             </div>
         </article>
