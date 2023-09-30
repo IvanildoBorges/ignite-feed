@@ -44,7 +44,7 @@ function App() {
     {
       id: 2,
       author: {
-        avatarUrl: "https://github.com/ivanildoborges.png",
+        avatarUrl: "https://media.licdn.com/dms/image/D4D35AQFU2zcbow1pZw/profile-framedphoto-shrink_400_400/0/1688985365301?e=1696694400&v=beta&t=SWctHrdktHlYbCAMCyjT-pSBKjZx_R_qrO36Vi9VWDI",
         name: "Ivanildo Borges",
         role: "Designer",
       },
