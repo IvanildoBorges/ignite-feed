@@ -1,11 +1,18 @@
-import ptBR from "date-fns/locale/pt-BR"
-import { format, formatDistanceToNow } from "date-fns"
+import { PostProps } from "../models/PostProps"
 import { Avatar } from "./Avatar"
 import { Comment } from "./Comment"
+import ptBR from "date-fns/locale/pt-BR"
+import { format, formatDistanceToNow } from "date-fns"
 import styles from "./Post.module.css"
-import { useState } from "react"
+import {
+    InvalidEvent,
+    ChangeEvent,
+    FormEvent, 
+    useState 
+} from "react"
+import { PostType } from "../models/Post"
 
-export function Post({ author, publishedAt, content }) {
+export function Post({ post }: PostType) {
     const [comments, setComments] = useState(["Muito bom Ivan, parabéns!!! 👏🏼👏🏼"])
     const [newCommentText, setNewCommentText] = useState("")
     const isNewCommentEmpty = newCommentText.length === 0
@@ -15,38 +22,38 @@ export function Post({ author, publishedAt, content }) {
     //     month: "long",
     //     hour: "2-digit",
     //     minute: "2-digit",
-    // }).format(publishedAt)
+    // }).format(post.publishedAt)
 
-    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    const publishedDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
         locale: ptBR,
     })
 
-    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
         locale: ptBR,
         addSuffix: true
     })
 
-    function handleCreateNewComment() {
+    function handleCreateNewComment(event: FormEvent) {
         event.preventDefault()
         setComments([...comments, newCommentText])
         setNewCommentText("")
     }
 
-    function handleNewCommentChange() {
+    function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
         event.target.setCustomValidity("")
         setNewCommentText(event.target.value)
     }
 
-    function deleteComment(commentoDelete) {
+    function deleteComment(commentToDelete: string) {
         //imutabilidade
         const commentWithoutDeleteOne = comments.filter(comment => {
             //retorna uma lista de comentários que não forem iguais
-            return comment !== commentoDelete 
+            return comment !== commentToDelete 
         })
         setComments(commentWithoutDeleteOne)
     }
 
-    function handleNewCommentInvalid() {
+    function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
         event.target.setCustomValidity("Digite um comentário!")
     }
 
@@ -54,30 +61,30 @@ export function Post({ author, publishedAt, content }) {
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src={author.avatarUrl} />
+                    <Avatar src={post.author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>{author.name}</strong>
-                        <span>{author.role}</span>
+                        <strong>{post.author.name}</strong>
+                        <span>{post.author.role}</span>
                     </div>
                 </div>
 
                 <time 
                     title={publishedDateFormatted} 
-                    dateTime={publishedAt.toISOString()}
+                    dateTime={post.publishedAt.toISOString()}
                 >
                     {publishedDateRelativeToNow}
                 </time>
             </header>
             <div className={styles.content}>
-                {content.map((line, index) => {
+                {post.content.map((line, index) => {
                     if (line.type === "paragraph") {
-                        return <p key={index}>{line.content}</p>
+                        return <p key={index}>{line.content.paragraph}</p>
                     } else if (line.type === "link") {
                         return <a key={index} href={line.content.url}>{line.content.title}</a>
                     } else if (line.type === "hashtag") {
                         return (
                             <p key={index}>
-                                {line.content.tags.map((tag, i) => {
+                                {line.content.tags?.map((tag, i) => {
                                     return (
                                         <span key={i}>
                                             <a href="">{tag}</a>{' '}

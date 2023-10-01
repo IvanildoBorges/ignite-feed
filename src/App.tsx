@@ -3,10 +3,11 @@ import { Header } from "./components/Header"
 import styles from "./App.module.css"
 import "./global.css"
 import { Sidebar } from "./components/Sidebar"
+import { PostProps } from "./models/PostProps"
 
 function App() {
 
-  const posts = [
+  const posts: PostProps[] = [
     {
       id: 1,
       author: {
@@ -17,11 +18,13 @@ function App() {
       content: [
           {
             type: "paragraph", 
-            content: "Olá pessoas 😁"
+            content: {
+              paragraph: "Olá pessoas 😁",
+            },
           },
           {
             type: "paragraph", 
-            content: "Acabei de subir mais um projeto no meu portfólio. É um pequeno projeto de um banco em typescript para compreensão dos princípios da Programação Orientada a Objetos. Confiram no link abaixo:"
+            content: {paragraph: "Acabei de subir mais um projeto no meu portfólio. É um pequeno projeto de um banco em typescript para compreensão dos princípios da Programação Orientada a Objetos. Confiram no link abaixo:"}
           },
           {
             type: "link", 
@@ -49,11 +52,15 @@ function App() {
       content: [
           {
             type: "paragraph", 
-            content: "Olá rede 😁"
+            content: {
+              paragraph: "Olá rede 😁"
+            },
           },
           {
             type: "paragraph", 
-            content: "Acabei de subir mais um projeto no meu portfólio. É um pequeno projeto de um banco em typescript para compreensão dos princípios da Programação Orientada a Objetos. Confiram no link abaixo:"
+            content: {
+              paragraph: "Acabei de subir mais um projeto no meu portfólio. É um pequeno projeto de um banco em typescript para compreensão dos princípios da Programação Orientada a Objetos. Confiram no link abaixo:"
+            },
           },
           {
             type: "link", 
@@ -84,9 +91,7 @@ function App() {
             return (
               <Post 
                 key={post.id}
-                author={post.author} 
-                content={post.content}
-                publishedAt={post.publishedAt}
+                post={post}
               />
             )
           })}
