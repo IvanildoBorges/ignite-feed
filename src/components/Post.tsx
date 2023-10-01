@@ -1,4 +1,3 @@
-import { PostProps } from "../models/PostProps"
 import { Avatar } from "./Avatar"
 import { Comment } from "./Comment"
 import ptBR from "date-fns/locale/pt-BR"
