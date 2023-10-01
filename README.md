@@ -6,6 +6,7 @@ Recriando o Feed do Ignite com React
 ### Tecnologias
 - React
 - CSS
+- Typescript
 
 ### Como rodar o projeto
 
